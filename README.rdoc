@@ -44,12 +44,18 @@ sudo docker run -dP --name demo_container -p 3000:3000 demo
 sudo docker ps
 ```
 
-# Run RSpec inside of the container
+# Setup the Test DB for running RSpec
 ``` shell
-sudo docker exec demo_container bin/rake spec
+docker exec app_web_1 bin/rake db:create db:setup RAILS_ENV=test
 ```
-# Run migrations for development inside the container
+
+# Run RSpec inside of the container against the Test DB
 ``` shell
-sudo docker exec demo_container bin/rake db:migrate RAILS_ENV=development
+docker exec app_web_1 bin/bundle exec rspec
 ```
-# From your Host computer, you should be able to access the Rails app @ http://localhost:1234/
+
+# Run migrations for Development environment inside the container
+``` shell
+docker exec app_web_1 bin/rake db:migrate RAILS_ENV=development
+```
+# From your Host computer, you should be able to access the Rails app @ http://localhost:1234/emails
