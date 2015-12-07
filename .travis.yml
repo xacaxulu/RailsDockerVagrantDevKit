@@ -7,13 +7,11 @@ language: ruby
 
 rvm:
   - 2.2.3
-addons:
-  firefox: "38.0.5" 
 
 before_install:
   - docker-compose up -d
-  - docker exec app_web_1 bin/rake db:migrate RAILS_ENV=test
-  - docker exec app_web_1 bin/bundle exec rspec
+  # - docker exec app_web_1 bin/rake db:migrate RAILS_ENV=test
+  # - docker exec app_web_1 bin/bundle exec rspec
   - docker ps
   # - sudo docker exec test_container bin/rspec spec
   # - "export DISPLAY=:99.0"
