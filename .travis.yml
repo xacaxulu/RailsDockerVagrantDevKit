@@ -12,8 +12,9 @@ addons:
 
 before_install:
   - docker-compose up -d
-  # - docker run -d --name test_container -p 127.0.0.1:80:4567 demo_image
-  - docker-compose ps -a
+  - docker exec app_web_1 bin/rake db:migrate RAILS_ENV=test
+  - docker exec app_web_1 bin/bundle exec rspec
+  - docker ps
   # - sudo docker exec test_container bin/rspec spec
   # - "export DISPLAY=:99.0"
   # - "sh -e /etc/init.d/xvfb start"
