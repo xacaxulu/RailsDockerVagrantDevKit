@@ -12,8 +12,8 @@ before_install:
   - docker-compose build
 
 script:
-  - ./run 'docker build -t test . && docker run test'
-  - ./run 'docker-compose up -d blog && docker ps'
+  - docker-compose build
+  - docker-compose up -d && docker ps
 # - docker exec app_web_1 bin/rake db:migrate RAILS_ENV=test
 # - docker exec app_web_1 bin/bundle exec rspec
 # - docker ps
