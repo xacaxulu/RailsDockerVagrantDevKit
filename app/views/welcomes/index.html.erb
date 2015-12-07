@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Welcomes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @welcomes.each do |welcome| %>
+      <tr>
+        <td><%= link_to 'Show', welcome %></td>
+        <td><%= link_to 'Edit', edit_welcome_path(welcome) %></td>
+        <td><%= link_to 'Destroy', welcome, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Welcome', new_welcome_path %>
