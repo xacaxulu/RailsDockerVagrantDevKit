@@ -6,6 +6,7 @@
 #
 default: &default
   adapter: postgres
+  host: localhost
   pool: 5
   timeout: 5000
 
