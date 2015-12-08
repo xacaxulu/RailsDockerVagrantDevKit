@@ -13,8 +13,8 @@ before_install:
 
 script:
   - docker-compose up -d && docker ps
-  - docker exec railsdockervagrantdevkit_web_1 bin/rake db:migrate RAILS_ENV=test
-  - docker exec railsdockervagrantdevkit_web_1 bin/bundle exec rspec
+  - docker exec railsdockervagrantdevkit_web_1 bin/rake db:create db:migrate RAILS_ENV=test
+  - docker exec railsdockervagrantdevkit_web_1 bin/bundle exec rspec RAILS_ENV=test
 # - docker ps
 # - sudo docker exec test_container bin/rspec spec
 # - "export DISPLAY=:99.0"
