@@ -10,10 +10,10 @@ rvm:
 
 before_install:
   - docker-compose build
+  - docker-compose up -d && docker ps
 env:
   - RAILS_ENV=test
 script:
-  - docker-compose up -d && docker ps
   - docker exec railsdockervagrantdevkit_web_1 bin/rake db:create db:migrate
   - docker exec railsdockervagrantdevkit_web_1 bin/bundle exec rspec
 # - docker ps
