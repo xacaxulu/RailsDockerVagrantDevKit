@@ -1,7 +1,7 @@
 db:
   image: postgres
 web:
-  build: . #builds from colocated Dockerfile in root of directory
+  build: . #builds container from colocated Dockerfile in root of directory
   command: bundle exec unicorn -p 3000
   volumes:
     - .:/app

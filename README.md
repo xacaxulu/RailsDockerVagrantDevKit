@@ -31,31 +31,28 @@ If you run an `ls` command in ~/app, you'll see that code has been shared via di
 
 # Build new docker image from Dockerfile named demo
 ``` shell
-sudo docker build -t demo . #where demo is the name of the image you are building.
+docker build -t demo . #where demo is the name of the image you are building.
 ```
 
 # Start docker container named demo_container from the image named demo
 ``` shell
-sudo docker run -dP --name demo_container -p 3000:3000 demo
+docker run -dP --name demo_container -p 3000:3000 demo
 ```
 
 # See docker container named docker_container is a running docker process
 ``` shell
-sudo docker ps
+docker ps
 ```
 
-# Setup the Test DB for running RSpec
+# Setup the DB for running RSpec
 ``` shell
-docker exec app_web_1 bin/rake db:create db:setup RAILS_ENV=test
+docker exec app_web_1 bin/rake db:migrate
 ```
 
-# Run RSpec inside of the container against the Test DB
+# Run RSpec inside of the container against the DB
 ``` shell
 docker exec app_web_1 bin/bundle exec rspec
 ```
-
-# Run migrations for Development environment inside the container
-``` shell
-docker exec app_web_1 bin/rake db:migrate RAILS_ENV=development
+app_web_1 bin/rake db:migrate RAILS_ENV=development
 ```
-# From your Host computer, you should be able to access the Rails app @ http://localhost:1234/emails
+# From your Host computer, you should be able to access the Rails app @ http://localhost:1234/
