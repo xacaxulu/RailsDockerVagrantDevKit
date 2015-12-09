@@ -16,7 +16,3 @@ env:
 script:
   - docker exec railsdockervagrantdevkit_web_1 bin/rake db:create db:migrate
   - docker exec railsdockervagrantdevkit_web_1 bin/bundle exec rspec
-# - docker ps
-# - sudo docker exec test_container bin/rspec spec
-# - "export DISPLAY=:99.0"
-# - "sh -e /etc/init.d/xvfb start"
