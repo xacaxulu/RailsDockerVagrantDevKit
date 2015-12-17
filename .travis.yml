@@ -14,15 +14,14 @@ before_install:
   - docker-compose up -d && docker ps
 env:
   - RAILS_ENV=test
+  - DOCKER_IMAGE_NAME=denmanjd/$DOCKER_IMAGE_NAME
 script:
   - docker exec railsdockervagrantdevkit_web_1 bin/rake db:create db:migrate
   - docker exec railsdockervagrantdevkit_web_1 bin/bundle exec rspec
 
-install:  
+install:
+  - docker build -t rails_app .
   - docker login --email=$DOCKER_HUB_EMAIL --username=$DOCKER_HUB_USERNAME --password=$DOCKER_HUB_PASSWORD
 
 script:  
   - if [ ! -z "$TRAVIS_TAG" ]; then docker tag $DOCKER_IMAGE_NAME:latest $DOCKER_IMAGE_NAME:$TRAVIS_TAG; fi && docker push $DOCKER_IMAGE_NAME
-
-env:  
-  - DOCKER_IMAGE_NAME=denmanjd/$DOCKER_IMAGE_NAME
