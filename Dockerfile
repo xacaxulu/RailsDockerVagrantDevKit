@@ -43,10 +43,11 @@ RUN gem install bundler --version "$BUNDLER_VERSION" \
 
 # don't create ".bundle" in all our apps
 ENV BUNDLE_APP_CONFIG $GEM_HOME
-ENV SECRET_KEY_BASE bin/bash bundle exec rake secret
+
 
 RUN mkdir -p /usr/src/app
 COPY . /usr/src/app
 WORKDIR /usr/src/app
 RUN gem install bundler && bundle install --jobs 20 --retry 5
+ENV SECRET_KEY_BASE bin/bash bundle exec rake secret
 CMD ["bin/bundle", "exec", "unicorn", "-p", "3000"]
