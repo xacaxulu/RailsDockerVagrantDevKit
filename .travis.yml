@@ -11,9 +11,15 @@ rvm:
 
 before_install:
   - docker-compose build
-  - docker-compose up -d && docker ps
+  - docker-compose up -d
+  - docker build -t denmanjd/rails_app .
+  - docker ps
 env:
   - RAILS_ENV=test
 script:
   - docker exec railsdockervagrantdevkit_web_1 bin/rake db:create db:migrate
   - docker exec railsdockervagrantdevkit_web_1 bin/bundle exec rspec
+
+install:
+  - docker login --email=$DOCKER_HUB_EMAIL --username=$DOCKER_HUB_USERNAME --password=$DOCKER_HUB_PASSWORD
+  - docker push denmanjd/rails_app
