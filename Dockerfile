@@ -1,5 +1,4 @@
 FROM ubuntu:14.04
-FROM ruby:2.0.0
 
 MAINTAINER James Denman <james.denman@levvel.io>
 
