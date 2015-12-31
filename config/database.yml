@@ -17,7 +17,7 @@ development: &default
   pool: 5
   username: postgres
   password:
-  host: db123
+  host: db
 
 test:
   <<: *default
