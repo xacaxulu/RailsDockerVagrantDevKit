@@ -49,5 +49,5 @@ RUN mkdir -p /usr/src/app
 COPY . /usr/src/app
 WORKDIR /usr/src/app
 RUN gem install bundler && bundle install --jobs 20 --retry 5
-ENV SECRET_KEY_BASE bin/bash bundle exec rake secret
+RUN export SECRET_KEY_BASE="bin/bash bundle exec rake secret"
 CMD ["bin/bundle", "exec", "unicorn", "-p", "3000"]
