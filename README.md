@@ -34,9 +34,14 @@ If you run an `ls` command in ~/app, you'll see that code has been shared via di
 docker build -t demo . #where demo is the name of the image you are building.
 ```
 
+# Build new clustered service (adding postgresql container) from docker-compose.yml
+``` shell
+docker-compose build #following instructions in docker-compose.yml (demo container + postgresql container in a single service)
+```
+
 # Start docker container named demo_container from the image named demo
 ``` shell
-docker run -dP --name demo_container -p 3000:3000 demo
+docker-compose up -d
 ```
 
 # See docker container named docker_container is a running docker process
@@ -44,15 +49,20 @@ docker run -dP --name demo_container -p 3000:3000 demo
 docker ps
 ```
 
-# Setup the DB for running RSpec
+# Setup the test DB for running RSpec
 ``` shell
-docker exec app_web_1 bin/rake db:migrate
+docker exec app_web_1 bin/rake db:create db:migrate RAILS_ENV=test
 ```
 
 # Run RSpec inside of the container against the DB
 ``` shell
 docker exec app_web_1 bin/bundle exec rspec
 ```
-app_web_1 bin/rake db:migrate RAILS_ENV=development
+
+# Setup the development DB so we can access it locally
+``` shell
+docker exec app_web_1 bin/rake db:create db:migrate RAILS_ENV=development
 ```
+
+
 # From your Host computer, you should be able to access the Rails app @ http://localhost:1234/
